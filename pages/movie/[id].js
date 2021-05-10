@@ -9,6 +9,7 @@ import MainLayout from '../../layout/MainLayout';
 import { getMovieDetail, getMovieCredits, getMovieRecomendations } from '../../fetch/movie';
 import { getConfiguration } from '../../fetch/configuration';
 import Rating from '../../components/Rating';
+import MovieItem from '../../components/MovieItem';
 
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
@@ -69,8 +70,8 @@ export async function getServerSideProps(context) {
   };
 }
 
-const MovieDetail = ({ movie, credits, config }) => {
-  console.log(movie, credits, config.images);
+const MovieDetail = ({ movie, credits, config, recommendations }) => {
+  console.log(recommendations);
   const router = useRouter();
 
   const sliderElement = useRef();
@@ -197,6 +198,29 @@ const MovieDetail = ({ movie, credits, config }) => {
                 </div>
               </div>
             </div>
+          </div>
+          <div className="w-full py-12">
+            <div className="uppercase">
+              <h2 className="text-2xl font-light text-gray-800 dark:text-white">Recommendations</h2>
+              <p className="text-base font-bold text-gray-800 dark:text-white">Movies</p>
+            </div>
+            {recommendations && (
+              <div className="my-12">
+                <div className="w-full grid grid-cols-4 gap-8">
+                  {recommendations.results?.map((item, i) => {
+                    return (
+                      <MovieItem
+                        key={i}
+                        id={item.id}
+                        poster_path={item.poster_path}
+                        original_title={item.original_title}
+                        vote_average={item.vote_average}
+                      />
+                    );
+                  })}
+                </div>
+              </div>
+            )}
           </div>
         </div>
       </MainLayout>

@@ -13,7 +13,7 @@ const MovieItem = (props) => {
             alt={props.original_title}
           />
           <p className="text-gray-600 text-base text-center">{props.original_title}</p>
-          <Rating vote_average={props.vote_average} />
+          <Rating vote_average={props.vote_average} isCenter={true} />
         </a>
       </Link>
     </div>

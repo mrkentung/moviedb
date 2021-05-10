@@ -57,12 +57,15 @@ const Sidebar = () => {
           <nav className="flex flex-col">
             {genres.data.data.genres.map((item, i) => {
               return (
-                <a
-                  key={i}
-                  className="text-gray-500 text-sm mb-4 cursor-pointer hover:text-gray-700">
-                  <FaDotCircle className="inline-block mr-2 text-xs" />
-                  {item.name}
-                </a>
+                <Link key={i} href={`/genres/${item.id}`}>
+                  <a
+                    className={`${
+                      path[2] == item.id ? 'text-gray-700' : 'text-gray-500'
+                    } text-sm mb-4 cursor-pointer hover:text-gray-700`}>
+                    <FaDotCircle className="inline-block mr-2 text-xs" />
+                    {item.name}
+                  </a>
+                </Link>
               );
             })}
           </nav>

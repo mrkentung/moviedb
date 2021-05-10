@@ -36,3 +36,22 @@ export const useMovieDetail = (id) => {
     refetchOnWindowFocus: false,
   });
 };
+
+export const getMovieByGenre = async (genreId, page = 1) => {
+  const res = await api.get(`/discover/movie`, {
+    params: {
+      api_key: process.env.API_KEY,
+      with_genres: genreId,
+      page: page,
+    },
+  });
+
+  return res;
+};
+
+export const useMovieByGenre = (genreId, page) => {
+  return useQuery(['getMovieByGenres', page, genreId], () => getMovieByGenre(genreId, page), {
+    refetchOnWindowFocus: false,
+    staleTime: 0,
+  });
+};
