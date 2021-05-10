@@ -11,12 +11,23 @@
     "build:analyze": "cross-env ANALYZE=true next build",
     "clean:build": "rm -rf out .next*",
     "lint": "eslint --fix .",
-    "format": "prettier --write './**/*.{js,jsx,ts,tsx,css,md,json}' --config ./.prettierrc"
+    "format": "prettier --write ./pages/**/*.{js,jsx} ./components/**/*.{js,jsx} --config ./.prettierrc"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^1.2.35",
+    "@fortawesome/free-brands-svg-icons": "^5.15.3",
+    "@fortawesome/free-regular-svg-icons": "^5.15.3",
+    "@fortawesome/free-solid-svg-icons": "^5.15.3",
+    "@fortawesome/react-fontawesome": "^0.1.14",
+    "axios": "^0.21.1",
     "next": "10.0.0",
+    "next-style-loader": "^0.3.1",
     "react": "17.0.1",
-    "react-dom": "17.0.1"
+    "react-dom": "17.0.1",
+    "react-query": "^3.16.0",
+    "react-rating": "^2.0.5",
+    "react-scroll": "^1.8.2",
+    "tailwind-scrollbar": "^1.3.0"
   },
   "devDependencies": {
     "@fullhuman/postcss-purgecss": "^3.0.0",
@@ -31,6 +42,7 @@
     "eslint-plugin-simple-import-sort": "^5.0.3",
     "postcss-preset-env": "^6.7.0",
     "prettier": "^2.1.2",
+    "react-icons": "^4.2.0",
     "tailwindcss": "^1.9.6"
   }
 }

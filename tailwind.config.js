@@ -5,8 +5,12 @@ module.exports = {
   },
   purge: ['./pages/**/*.js', './components/**/*.js'],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        inter: ['Inter', 'sans-serif'],
+      },
+    },
   },
   variants: {},
-  plugins: [],
+  plugins: [require('tailwind-scrollbar')],
 };
