@@ -21,14 +21,10 @@ const Genres = () => {
     }
   }, [data, page, queryClient]);
 
+  // Reset state only when router has changed.
   useEffect(() => {
-    return () => {
-      // clear page when router query changed.
-      router.events.on('routeChangeComplete', () => {
-        setPage(1);
-      });
-    };
-  }, [data, page, queryClient]);
+    setPage(1);
+  }, [router.asPath]);
 
   return (
     <Fragment>
