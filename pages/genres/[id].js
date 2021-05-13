@@ -21,6 +21,15 @@ const Genres = () => {
     }
   }, [data, page, queryClient]);
 
+  useEffect(() => {
+    return () => {
+      // clear page when router query changed.
+      router.events.on('routeChangeComplete', () => {
+        setPage(1);
+      });
+    };
+  }, [data, page, queryClient]);
+
   return (
     <Fragment>
       <Head>
