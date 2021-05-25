@@ -1,4 +1,4 @@
-import { Fragment, useState, useEffect } from 'react';
+import { Fragment, useState, useEffect, useContext } from 'react';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { useQueryClient } from 'react-query';
@@ -7,6 +7,7 @@ import { animateScroll as scroll } from 'react-scroll';
 import { getMovieByGenre, useMovieByGenre } from '../../fetch/movie';
 import MainLayout from '../../layout/MainLayout';
 import MovieItem from '../../components/MovieItem';
+import { Context } from '../../utils/common/context';
 
 const Genres = () => {
   const router = useRouter();
@@ -14,6 +15,8 @@ const Genres = () => {
   const [page, setPage] = useState(1);
 
   const { data, isSuccess } = useMovieByGenre(router.query.id, page);
+
+  const { state } = useContext(Context);
 
   useEffect(() => {
     if (data?.data.page > data?.data.total_page) {
@@ -29,14 +32,16 @@ const Genres = () => {
   return (
     <Fragment>
       <Head>
-        <title>Movie by genres</title>
+        <title>Movie by genres | {state.selectedGenre.name}</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
       <MainLayout>
         <div className="w-full h-full p-12 bg-white ml-64">
           <div className="uppercase">
             <h2 className="text-2xl font-light text-gray-800 dark:text-white">Movie by genres</h2>
-            <p className="text-base font-bold text-gray-800 dark:text-white">Movies</p>
+            <p className="text-base font-bold text-gray-800 dark:text-white">
+              {state.selectedGenre.name}
+            </p>
           </div>
           {isSuccess && (
             <div className="my-12">

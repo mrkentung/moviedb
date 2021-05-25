@@ -1,8 +1,10 @@
+import React, { useContext } from 'react';
 import { HiHeart, HiChartSquareBar, HiCalendar } from 'react-icons/hi';
 import { FaDotCircle } from 'react-icons/fa';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useGenres } from '../fetch/popular';
+import { Context } from '../utils/common/context';
 
 const Sidebar = () => {
   const { asPath } = useRouter();
@@ -10,6 +12,8 @@ const Sidebar = () => {
   const path = asPath.split('/');
 
   const genres = useGenres();
+
+  const { dispatch } = useContext(Context);
 
   return (
     <div className="flex flex-col w-64 h-screen px-8 py-8 bg-white border-r dark:bg-gray-800 dark:border-gray-600 fixed overflow-y-auto scrollbar scrollbar-thin">
@@ -58,13 +62,19 @@ const Sidebar = () => {
             {genres.data.data.genres.map((item, i) => {
               return (
                 <Link key={i} href={`/genres/${item.id}`}>
-                  <a
+                  <button
                     className={`${
                       path[2] == item.id ? 'text-gray-700' : 'text-gray-500'
-                    } text-sm mb-4 cursor-pointer hover:text-gray-700`}>
+                    } text-sm mb-4 cursor-pointer hover:text-gray-700 text-left outline-none focus:outline-none`}
+                    onClick={() =>
+                      dispatch({
+                        type: 'SELECTED_GENRE',
+                        payload: item,
+                      })
+                    }>
                     <FaDotCircle className="inline-block mr-2 text-xs" />
                     {item.name}
-                  </a>
+                  </button>
                 </Link>
               );
             })}
